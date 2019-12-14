@@ -11,7 +11,7 @@ $(document).ready(function(){
   function renderTodo(data) {
     let html = '<ol>';
     data.forEach(element => {
-      html += `<li>${element.todo}</li>`;
+      html += `<li>${element.todo} <button class="delete-todo" onclick="deleteButton(${element.id})" data-todoId="${element.id}">Delete Todo</button></li>`;
     });
     html += '</ol>';
     return html;
@@ -34,3 +34,15 @@ $(document).ready(function(){
     
   });
 });
+
+
+function deleteButton(id){
+  console.log(id);
+  $.ajax({
+    url: '/api/todos/' + id,
+    type: 'DELETE',
+    success: function (){
+      console.log('successful');
+    }
+  });
+}
